@@ -84,6 +84,7 @@ export default function Settings() {
           />
           <button className="settingsSubmit" type="submit">
             Update
+            
           </button>
           {success && (
             <span

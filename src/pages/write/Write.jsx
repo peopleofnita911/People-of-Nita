@@ -1,7 +1,10 @@
+import React from "react";
 import { useContext, useState } from "react";
 import "./write.css";
 import axios from "axios";
 import { Context } from "../../context/Context";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Write() {
   const [title, setTitle] = useState("");
@@ -17,22 +20,29 @@ export default function Write() {
       desc,
     };
     if (file) {
-      const data =new FormData();
+      const data = new FormData();
       const filename = Date.now() + file.name;
       data.append("name", filename);
       data.append("file", file);
       newPost.photo = filename;
       try {
         await axios.post("/upload", data);
-      } catch (err) {}
+      } catch (err) {
+        toast.error("File upload failed!");
+      }
     }
     try {
       const res = await axios.post("/posts", newPost);
+      toast.success("Post published successfully!");
       window.location.replace("/post/" + res.data._id);
-    } catch (err) {}
+    } catch (err) {
+      toast.error("Failed to publish post!");
+    }
   };
+
   return (
     <div className="write">
+      <ToastContainer />
       {file && (
         <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
       )}
@@ -52,7 +62,7 @@ export default function Write() {
             placeholder="Title"
             className="writeInput"
             autoFocus={true}
-            onChange={e=>setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className="writeFormGroup">
@@ -60,9 +70,10 @@ export default function Write() {
             placeholder="Tell your story..."
             type="text"
             className="writeInput writeText"
-            onChange={e=>setDesc(e.target.value)}
+            onChange={(e) => setDesc(e.target.value)}
           ></textarea>
         </div>
+
         <button className="writeSubmit" type="submit">
           Publish
         </button>

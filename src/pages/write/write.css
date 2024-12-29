@@ -15,9 +15,11 @@
 }
 
 .writeFormGroup {
-  margin-left: 150px;
+  margin-left: 100px;
+  margin-right: 40px;
   display: flex;
   align-items: center;
+  border-bottom: 2px solid black;
 }
 
 .writeIcon {

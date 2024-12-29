@@ -2,6 +2,8 @@ import axios from "axios";
 import { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./login.css";
 
 export default function Login() {
@@ -18,11 +20,12 @@ export default function Login() {
         password: passwordRef.current.value,
       });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      toast.success("Login successful!");
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE" });
+      toast.error("Login failed. Please check your credentials.");
     }
   };
-
 
   return (
     <div className="login">
@@ -46,7 +49,6 @@ export default function Login() {
           Login
         </button>
       </form>
-      
     </div>
   );
 }

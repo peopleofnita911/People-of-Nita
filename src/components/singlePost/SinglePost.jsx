@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./singlePost.css";
 
 export default function SinglePost() {
@@ -17,10 +19,27 @@ export default function SinglePost() {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get("/posts/" + path);
-      setPost(res.data);
-      setTitle(res.data.title);
-      setDesc(res.data.desc);
+      const loadingToast = toast.loading("Loading post...");
+
+      try {
+        const res = await axios.get("/posts/" + path);
+        setPost(res.data);
+        setTitle(res.data.title);
+        setDesc(res.data.desc);
+        toast.update(loadingToast, {
+          render: "Post loaded successfully",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+      } catch (error) {
+        toast.update(loadingToast, {
+          render: "Failed to load post",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
+      }
     };
     getPost();
   }, [path]);
@@ -30,8 +49,11 @@ export default function SinglePost() {
       await axios.delete(`/posts/${post._id}`, {
         data: { username: user.username },
       });
+      toast.success("Post deleted successfully");
       window.location.replace("/");
-    } catch (err) {}
+    } catch (err) {
+      toast.error("Failed to delete post");
+    }
   };
 
   const handleUpdate = async () => {
@@ -41,15 +63,18 @@ export default function SinglePost() {
         title,
         desc,
       });
-      setUpdateMode(false)
-    } catch (err) {}
+      setUpdateMode(false);
+      toast.success("Post updated successfully");
+    } catch (err) {
+      toast.error("Failed to update post");
+    }
   };
 
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
         {post.photo && (
-          <img src={PF + post.photo} alt="" className="singlePostImg " />
+          <img src={PF + post.photo} alt="" className="singlePostImg" />
         )}
         {updateMode ? (
           <input
