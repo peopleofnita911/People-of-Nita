@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./sidebar.css"
-import img from "../../assets/img.jpg"
+// import img from "../../assets/img.jpg"
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 export default function Sidebar() {
@@ -18,7 +18,7 @@ export default function Sidebar() {
             <div className="sidebarItem">
                 <span className="sidebarTitle">ABOUT ME</span>
                 <img
-                    src={img}
+                    // src={img}
                     alt=""
                     style={{ objectFit: 'cover' }}
                 />
