@@ -6,7 +6,7 @@ import { Context } from "../../context/Context";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./singlePost.css";
-
+import React from 'react';
 export default function SinglePost() {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
@@ -113,14 +113,21 @@ export default function SinglePost() {
           </span>
         </div>
         {updateMode ? (
-          <textarea
-            className="singlePostDescInput"
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
-          />
-        ) : (
-          <p className="singlePostDesc">{desc}</p>
-        )}
+  <textarea
+    className="singlePostDescInput"
+    value={desc}
+    onChange={(e) => setDesc(e.target.value)}
+  />
+) : (
+  <p className="singlePostDesc">
+    {desc.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ))}
+  </p>
+)}
         {updateMode && (
           <button className="singlePostButton" onClick={handleUpdate}>
             Update

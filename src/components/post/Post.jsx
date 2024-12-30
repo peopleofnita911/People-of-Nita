@@ -1,5 +1,6 @@
 import "./post.css";
 import { Link } from "react-router-dom";
+import React from 'react';
 
 export default function Post({ post }) {
   const PF = "http://localhost:5001/images/";
@@ -20,7 +21,14 @@ export default function Post({ post }) {
           {new Date(post.createdAt).toDateString()}
         </span>
       </div>
-      <p className="postDesc">{post.desc}</p>
+     <p className="postDesc">
+  {post.desc.split('\n').map((line, index) => (
+    <React.Fragment key={index}>
+      {line}
+      <br />
+    </React.Fragment>
+  ))}
+</p>
     </div>
   );
   
