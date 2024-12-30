@@ -29,6 +29,13 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json("File has been uploaded");
 });
 
+// Testing the server
+app.get("/", (req, res) => {
+  return res.json({
+      success: true,
+      message: "Your server is up and running ...",
+  });
+});
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
