@@ -19,23 +19,29 @@ export default function Write() {
       title,
       desc,
     };
-    if (file) {
-      const data = new FormData();
-      const filename = Date.now() + file.name;
-      data.append("name", filename);
-      data.append("file", file);
-      newPost.photo = filename;
-      try {
-        await axios.post("/upload", data);
-      } catch (err) {
-        toast.error("File upload failed!");
-      }
-    }
     try {
+      if (file) {
+        const data = new FormData();
+        // No need to set a filename; Cloudinary handles it
+        data.append("file", file);
+  
+        // Upload the image to Cloudinary via your backend
+        const uploadRes = await axios.post("/upload", data);
+  
+        // Get the image URL from the response
+        const { url } = uploadRes.data;
+  
+        // Set the image URL in newPost.photo
+        newPost.photo = url;
+      }
+  
+      // Create the post with the image URL
       const res = await axios.post("/posts", newPost);
+  
       toast.success("Post published successfully!");
       window.location.replace("/post/" + res.data._id);
     } catch (err) {
+      console.error(err);
       toast.error("Failed to publish post!");
     }
   };
