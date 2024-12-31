@@ -46,12 +46,28 @@ const storage = new CloudinaryStorage({
   },
 });
 
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "images");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, req.body.name); 
+//   },
+// });
+
 const upload = multer({ storage: storage });
+
+// Update the image upload route
 
 // Update the image upload route
 app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json({ url: req.file.path });
+  res.status(200).json({ url: req.file.path });
 });
+
+// app.post("/api/upload", upload.single("file"), (req, res) => {
+//   res.status(200).json("File has been uploaded");
+// });
 
 // Testing the server
 app.get("/", (req, res) => {
