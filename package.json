@@ -44,7 +44,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://people-of-nita-backend.onrender.com",
+  "proxy": "https://people-of-nita-backend.onrender.com/api",
   "devDependencies": {
     "concurrently": "^9.1.0",
     "tailwindcss": "^3.4.17"
