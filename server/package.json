@@ -2,12 +2,13 @@
   "dependencies": {
     "@testing-library/user-event": "^14.5.2",
     "bcrypt": "^5.0.1",
-    "cloudinary": "^2.5.1",
+    "cloudinary": "^1.41.3",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "mongoose": "^5.12.9",
     "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^2.0.7",
     "path": "^0.12.7"
   },
