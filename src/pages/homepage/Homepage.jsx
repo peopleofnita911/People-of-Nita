@@ -1,4 +1,4 @@
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom"; // Ensure you're importing from 'react-router-dom'
 import Header from "../../components/header/Header";
 import Posts from "../../components/posts/Posts";
 
@@ -6,26 +6,30 @@ import "./homepage.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-
 export default function Homepage() {
-  const [posts,setPosts]=useState([]);
-
+  const [posts, setPosts] = useState([]);
+  const BASE_URL = process.env.REACT_APP_BASE_URL; // Updated variable name
   const { search } = useLocation();
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get("/api/posts" + search);
-      setPosts(res.data);
+      try {
+        const res = await axios.get(`${BASE_URL}/api/posts${search}`);
+        setPosts(res.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
     };
     fetchPosts();
-  }, [search]);
-  const location = useLocation();
-  console.log(posts);
+  }, [search, BASE_URL]);
+
+  console.log("Posts:", posts);
+
   return (
     <>
       <Header />
       <div className="home">
-        <Posts posts={posts}/>
+        <Posts posts={posts} />
       </div>
     </>
   );

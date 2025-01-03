@@ -17,7 +17,7 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 // Configure CORS
 app.use(cors({
-  origin: ['https://people-of-nita.vercel.app/',"*"], // Replace with your frontend URL
+  origin: ['https://people-of-nita.vercel.app/',"http://localhost:3000/","*"], // Replace with your frontend URL
   credentials: true, // Include credentials if needed
 }));
 
