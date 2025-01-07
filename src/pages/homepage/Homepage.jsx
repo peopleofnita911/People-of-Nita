@@ -8,13 +8,17 @@ import { useEffect, useState } from "react";
 
 export default function Homepage() {
   const [posts, setPosts] = useState([]);
-  const BASE_URL = process.env.REACT_APP_BASE_URL; // Updated variable name
+  const BASE_URL = process.env.REACT_APP_BASE_URL || "https://people-of-nita.onrender.com";
+ // Updated variable name
+  console.log(BASE_URL);
   const { search } = useLocation();
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get(`${BASE_URL}/api/posts${search}`);
+        const res = await axios.get(`${BASE_URL}/api/posts${search}`, {
+          withCredentials: true, // Include cookies if needed
+        });
         setPosts(res.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
