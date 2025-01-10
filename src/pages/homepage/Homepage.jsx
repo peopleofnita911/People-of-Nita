@@ -10,7 +10,7 @@ export default function Homepage() {
   const [posts, setPosts] = useState([]);
   const BASE_URL = process.env.REACT_APP_BASE_URL ;
  // Updated variable name
-  console.log(BASE_URL);
+
   const { search } = useLocation();
 
   useEffect(() => {

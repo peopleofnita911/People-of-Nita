@@ -5,10 +5,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 export default function Sidebar() {
     const [cats, setCats] = useState([]);
-
+    const BASE_URL = process.env.REACT_APP_BASE_URL ;
     useEffect(() => {
         const getCats = async () => {
-            const res = await axios.get("/categories");
+            const res = await axios.get(`${BASE_URL}/api/categories`);
             setCats(res.data);
         };
         getCats();

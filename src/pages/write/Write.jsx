@@ -11,7 +11,7 @@ export default function Write() {
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
-
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = {
@@ -26,7 +26,7 @@ export default function Write() {
         data.append("file", file);
   
         // Upload the image to Cloudinary via your backend
-        const uploadRes = await axios.post("/upload", data);
+        const uploadRes = await axios.post(`${BASE_URL}/api/upload`, data);
   
         // Get the image URL from the response
         const { url } = uploadRes.data;
@@ -36,10 +36,10 @@ export default function Write() {
       }
   
       // Create the post with the image URL
-      const res = await axios.post("/posts", newPost);
+      const res = await axios.post(`${BASE_URL}/api/posts`, newPost);
   
       toast.success("Post published successfully!");
-      window.location.replace("/post/" + res.data._id);
+      window.location.replace(`${BASE_URL}/api/post/` + res.data._id);
     } catch (err) {
       console.error(err);
       toast.error("Failed to publish post!");

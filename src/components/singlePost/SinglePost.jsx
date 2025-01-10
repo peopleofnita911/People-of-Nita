@@ -16,13 +16,13 @@ export default function SinglePost() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
-
+  const BASE_URL = process.env.REACT_APP_BASE_URL ;
   useEffect(() => {
     const getPost = async () => {
       const loadingToast = toast.loading("Loading post...");
 
       try {
-        const res = await axios.get("/posts/" + path);
+        const res = await axios.get(`${BASE_URL}/api/posts/` + path);
         setPost(res.data);
         setTitle(res.data.title);
         setDesc(res.data.desc);
@@ -46,7 +46,7 @@ export default function SinglePost() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/posts/${post._id}`, {
+      await axios.delete(`${BASE_URL}/api/posts/${post._id}`, {
         data: { username: user.username },
       });
       toast.success("Post deleted successfully");
@@ -58,7 +58,7 @@ export default function SinglePost() {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`/posts/${post._id}`, {
+      await axios.put(`${BASE_URL}/api/posts/${post._id}`, {
         username: user.username,
         title,
         desc,
