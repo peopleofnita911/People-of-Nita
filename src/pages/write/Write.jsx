@@ -39,7 +39,7 @@ export default function Write() {
       const res = await axios.post(`${BASE_URL}/api/posts`, newPost);
   
       toast.success("Post published successfully!");
-      window.location.replace(`${BASE_URL}/api/post/` + res.data._id);
+      window.location.replace(`${BASE_URL}/post/` + res.data._id);
     } catch (err) {
       console.error(err);
       toast.error("Failed to publish post!");
