@@ -15,6 +15,7 @@ export default function Login() {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
+      console.log("Printing the base url " + BASE_URL);
       const res = await axios.post(`${BASE_URL}/api/auth/login`, {
         username: userRef.current.value,
         password: passwordRef.current.value,
