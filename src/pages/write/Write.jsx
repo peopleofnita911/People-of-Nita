@@ -11,7 +11,7 @@ export default function Write() {
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
-  const BASE_URL = "people-of-nita.vercel.app";
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = {
