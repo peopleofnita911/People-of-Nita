@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <div className="header">
       <div className="headerTitles">
-        <span className="headerTitleSm">People Of NITA</span>
+        <span className="headerTitleSm">Success Stories</span>
 
       </div>
       <img
