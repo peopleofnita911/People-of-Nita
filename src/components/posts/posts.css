@@ -1,6 +1,33 @@
-.posts{
-    flex: 9;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 20px;
-}
+.posts {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 20px 0;
+    width: 100%;
+  }
+  
+  /* Tablet view */
+  @media screen and (min-width: 768px) {
+    .posts {
+      margin: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+  }
+  
+  /* Desktop view */
+  @media screen and (min-width: 1024px) {
+    .posts {
+      flex: 9;
+    }
+  }
+  
+  /* Fallback for no posts message */
+  .posts > p {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    padding: 40px 0;
+    grid-column: 1 / -1;
+  }

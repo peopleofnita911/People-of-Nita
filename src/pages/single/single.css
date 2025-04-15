@@ -1,3 +1,23 @@
-.single{
+.single {
     display: flex;
-}
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Tablet and larger screens */
+  @media screen and (min-width: 768px) {
+    .single {
+      flex-direction: row;
+      padding: 30px;
+    }
+  }
+  
+  /* Desktop screens */
+  @media screen and (min-width: 1024px) {
+    .single {
+      padding: 40px;
+    }
+  }
