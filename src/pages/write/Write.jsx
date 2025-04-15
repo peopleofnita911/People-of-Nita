@@ -36,10 +36,10 @@ export default function Write() {
       }
   
       // Create the post with the image URL
-      const res = await axios.post(`${BASE_URL}/api/posts`, newPost);
+      const res = await axios.post(`${BASE_URL}/posts`, newPost);
   
       toast.success("Post published successfully!");
-      window.location.replace(`${BASE_URL}/post/` + res.data._id);
+      window.location.replace(`${BASE_URL}/api/posts/` + res.data._id);
     } catch (err) {
       console.error(err);
       toast.error("Failed to publish post!");
